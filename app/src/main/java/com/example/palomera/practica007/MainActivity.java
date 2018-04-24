@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    TextView txtLimite;
     ImageView imagen;
     SeekBar seekBar;
     private int iWidth = 65; private int iHeight = 52;
@@ -23,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         imagen = (ImageView) findViewById(R.id.imageView);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
-
+        txtLimite = findViewById(R.id.textView);
         //eventos para la redireccion de la pantalla
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -35,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
                 imagen.getLayoutParams().height = (int)alto;
                 imagen.getLayoutParams().width = (int)ancho;
                 imagen.requestLayout();
+
+                if(i==100){
+                    txtLimite.setText("Llegó al limite");
+                    Toast.makeText(MainActivity.this, "Llegó al Limite", Toast.LENGTH_SHORT).show();
+                }else if(i!=100){
+                    txtLimite.setText("USTED TIENE UN : "+i+" % DE PROGRESO");
+                }
             }
 
             @Override
